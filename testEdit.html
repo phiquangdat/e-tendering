@@ -12,7 +12,7 @@
                     const tendersTable = document.getElementById("tendersTable");
                     tendersTable.innerHTML = ""; // Clear the table before adding new items
                     tenders.forEach(tender => {
-                        const row = tendersTable.insertRow();
+                        const row = tendersTable.insertRow();//insertRow() method creates a new row in a table and returns a reference to the newly created row.
                         row.insertCell(0).textContent = tender.tender_id;
                         row.insertCell(1).textContent = tender.tender_name;
                         row.insertCell(2).textContent = tender.construction_from.split('T')[0];
