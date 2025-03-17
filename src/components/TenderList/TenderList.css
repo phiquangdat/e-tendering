@@ -7,3 +7,16 @@ td {
   border-collapse: collapse;
   padding: 10px;
 }
+
+#tender-search {
+  position: relative;
+  top: -15px;
+}
+
+.click-to-detail:hover {
+  cursor: pointer;
+  color: #0066cc;
+  text-decoration: underline;
+  background-color: transparent;
+  border-color: inherit;
+}

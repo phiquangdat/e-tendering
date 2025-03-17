@@ -8,7 +8,8 @@ import {
 import Navbar from "./components/Navbar";
 import Login from "./components/Login/Login";
 import TenderList from "./components/TenderList/TenderList";
-import CreateTender from "./components/CreateTender";
+import CreateTender from "./components/CreateTender/CreateTender";
+import DetailedInfo from "./components/DetailedInfo/DetailedInfo";
 import SubmitBid from "./components/SubmitBid";
 import "./App.css";
 
@@ -17,12 +18,7 @@ function App() {
   const [user, setUser] = useState([]);
   const [tenders, setTenders] = useState([]);
   const [bids, setBids] = useState([]);
-  const [showForm, setShowForm] = useState(false);
   const [lastId, setLastId] = useState(0);
-  useEffect(() => {
-    const mockTenders = [];
-    setTenders(mockTenders);
-  }, []);
 
   const handleLogin = (email, password) => {
     if (email && password) {
@@ -32,8 +28,6 @@ function App() {
       };
       setIsAuthenticated(true);
       setUser([...user, newUser]);
-
-      //Use JSON.stringify for the back-end
     }
   };
 
@@ -49,48 +43,48 @@ function App() {
     };
     setBids([...bids, newBid]);
   };
-
   const addTender = (newTender) => {
     setTenders([...tenders, newTender]);
     setLastId((prevId) => prevId + 1);
   };
-
   return (
     <Router>
       <div className="app">
         <Navbar isAuthenticated={isAuthenticated} handleLogout={handleLogout} />
         <Routes>
           <Route
+            path="/"
+            element={
+              <TenderList tenders={tenders} isAuthenticated={isAuthenticated} />
+            }
+          />
+          <Route
             path="/login"
             element={
               !isAuthenticated ? (
                 <Login handleLogin={handleLogin} />
               ) : (
-                <Navigate to="/tenders" />
-              )
-            }
-          />
-          <Route
-            path="/tenders"
-            element={
-              isAuthenticated ? (
-                <TenderList
-                  tenders={tenders}
-                  setShowForm={setShowForm}
-                  lastId={lastId}
-                />
-              ) : (
-                <Navigate to="/login" />
+                <Navigate to="/" />
               )
             }
           />
           <Route
             path="/create-tender"
             element={
-              <CreateTender
-                addTender={addTender}
-                setShowForm={setShowForm}
-              ></CreateTender>
+              isAuthenticated ? (
+                <CreateTender addTender={addTender} lastId={lastId} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/tender/:id/details"
+            element={
+              <DetailedInfo
+                tenders={tenders}
+                isAuthenticated={isAuthenticated}
+              />
             }
           />
           <Route
@@ -103,7 +97,7 @@ function App() {
               )
             }
           />
-          <Route path="*" element={<Navigate to="/tenders" />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
     </Router>

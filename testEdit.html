@@ -82,7 +82,10 @@
         function editTender(tender) {
             document.getElementById("edit_tender_id").value = tender.tender_id;
             document.getElementById("edit_tender_name").value = tender.tender_name;
+<<<<<<< HEAD
             document.getElementById("edit_tender_description").value = tender.description; // add description
+=======
+>>>>>>> 4168e75b2d66b39fd932e8a3a429185f6d60b733
             document.getElementById("edit_construction_from").value = tender.construction_from.split('T')[0];
             document.getElementById("edit_construction_to").value = tender.construction_to.split('T')[0];
             document.getElementById("edit_date_of_tender_notice").value = tender.date_of_tender_notice.split('T')[0];
@@ -97,7 +100,10 @@
             const tenderData = {
                 tender_id: document.getElementById("edit_tender_id").value,
                 tender_name: document.getElementById("edit_tender_name").value,
+<<<<<<< HEAD
                 description: document.getElementById("edit_tender_description").value, // add description
+=======
+>>>>>>> 4168e75b2d66b39fd932e8a3a429185f6d60b733
                 construction_from: document.getElementById("edit_construction_from").value,
                 construction_to: document.getElementById("edit_construction_to").value,
                 date_of_tender_notice: document.getElementById("edit_date_of_tender_notice").value,
@@ -215,7 +221,10 @@
     <form onsubmit="event.preventDefault(); saveEditedTender();">
         <label>Tender ID: <input type="text" id="edit_tender_id" readonly></label><br>
         <label>Tender Name: <input type="text" id="edit_tender_name" required></label><br>
+<<<<<<< HEAD
         <label>Description: <input type="text" id="edit_tender_description" required></label><br> <!-- add description -->
+=======
+>>>>>>> 4168e75b2d66b39fd932e8a3a429185f6d60b733
         <label>Construction From: <input type="date" id="edit_construction_from" required></label><br>
         <label>Construction To: <input type="date" id="edit_construction_to" required></label><br>
         <label>Date of Tender Notice: <input type="date" id="edit_date_of_tender_notice" required></label><br>
@@ -233,7 +242,10 @@
             <tr>
                 <th>Tender ID</th>
                 <th>Tender Name</th>
+<<<<<<< HEAD
                 <th>Description</th> <!-- add description -->
+=======
+>>>>>>> 4168e75b2d66b39fd932e8a3a429185f6d60b733
                 <th>Construction From</th>
                 <th>Construction To</th>
                 <th>Date of Tender Notice</th>

@@ -1,11 +1,30 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./TenderList.css";
-function TenderList({ tenders, lastId }) {
+function TenderList({ tenders, isAuthenticated }) {
+  const [filteredTender, setFilteredTender] = useState(tenders);
+
+  const handleSearch = (event) => {
+    const query = event.target.value.toLowerCase();
+
+    setFilteredTender(() =>
+      tenders.filter((tender) => tender.name.toLowerCase().includes(query))
+    );
+  };
+
+  function handleRowClick(tender) {
+    navigate(`/tender/${tender.id}/details`);
+  }
   const navigate = useNavigate();
   return (
     <div>
       <h2>Tenders</h2>
+      <input
+        id="tender-search"
+        type="text"
+        placeholder="Search for Tender Name"
+        onChange={handleSearch}
+      ></input>
       <table>
         <thead>
           <tr>
@@ -19,31 +38,42 @@ function TenderList({ tenders, lastId }) {
           </tr>
         </thead>
         <tbody>
-          {tenders.map((tender) => (
+          {filteredTender.map((tender) => (
             <tr key={tender.id}>
-              <td>{lastId}</td>
-              <td>{tender.name}</td>
+              <td>{tender.id}</td>
+              <td>
+                <span
+                  onClick={() => handleRowClick(tender)}
+                  className="click-to-detail"
+                >
+                  {tender.name}
+                </span>
+              </td>
               <td>{tender.notice}</td>
               <td>{tender.close}</td>
-              <td>{tender.winner}</td>
+              <td>{tender.disclosingWinner}</td>
               <td>{tender.status}</td>
               <td>
-                <button
-                  onClick={() =>
-                    navigate(`/tender/${tender.id}/bid`, { state: tender })
-                  }
-                >
-                  Bid
-                </button>
+                {isAuthenticated && (
+                  <button
+                    onClick={() =>
+                      navigate(`/tender/${tender.id}/bid`, { state: tender })
+                    }
+                  >
+                    Bid
+                  </button>
+                )}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      <button onClick={() => navigate("/create-tender")}>
-        Register Tender
-      </button>
+      {isAuthenticated && (
+        <button onClick={() => navigate("/create-tender")}>
+          Register Tender
+        </button>
+      )}
     </div>
   );
 }
