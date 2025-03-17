@@ -83,6 +83,7 @@
         function editTender(tender) {
             document.getElementById("edit_tender_id").value = tender.tender_id;
             document.getElementById("edit_tender_name").value = tender.tender_name;
+            document.getElementById("edit_tender_description").value = tender.description; // add description
             document.getElementById("edit_construction_from").value = tender.construction_from.split('T')[0];
             document.getElementById("edit_construction_to").value = tender.construction_to.split('T')[0];
             document.getElementById("edit_date_of_tender_notice").value = tender.date_of_tender_notice.split('T')[0];
