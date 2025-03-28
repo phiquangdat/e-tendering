@@ -1,11 +1,36 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./TenderList.css";
-function TenderList({ tenders, lastId }) {
+
+function TenderList({ tenders, isCompany, isCity }) {
   const navigate = useNavigate();
+
+  const [filteredTender, setFilteredTender] = useState(tenders);
+
+  const handleSearch = (event) => {
+    const query = event.target.value.toLowerCase();
+    setFilteredTender(
+      tenders.filter((tender) =>
+        tender.tender_name.toLowerCase().includes(query)
+      )
+    );
+  };
+
+  function handleRowClick(tender) {
+    navigate(`/tender/${tender.tender_id}/details`);
+  }
+
   return (
-    <div>
-      <h2>Tenders</h2>
+    <div className="tender-list">
+      <div className="search-container">
+        <span className="search-icon material-symbols-outlined">search</span>
+        <input
+          id="tender-search"
+          type="text"
+          placeholder="Search for Tender Name"
+          onChange={handleSearch}
+        />
+      </div>
       <table>
         <thead>
           <tr>
@@ -14,36 +39,67 @@ function TenderList({ tenders, lastId }) {
             <th>Date of Tender Notice</th>
             <th>Date of Tender Close</th>
             <th>Date of Disclosing Winner</th>
-            <th>Tender status</th>
-            <th></th>
+            <th>Tender Status</th>
+            {(isCompany || isCity) && <th>Actions</th>}
           </tr>
         </thead>
         <tbody>
-          {tenders.map((tender) => (
-            <tr key={tender.id}>
-              <td>{lastId}</td>
-              <td>{tender.name}</td>
-              <td>{tender.notice}</td>
-              <td>{tender.close}</td>
-              <td>{tender.winner}</td>
-              <td>{tender.status}</td>
+          {filteredTender.map((tender) => (
+            <tr key={tender.tender_id}>
+              <td>{tender.tender_id}</td>
               <td>
-                <button
-                  onClick={() =>
-                    navigate(`/tender/${tender.id}/bid`, { state: tender })
-                  }
+                <span
+                  onClick={() => handleRowClick(tender)}
+                  className="click-to-detail"
                 >
-                  Bid
-                </button>
+                  {tender.tender_name}
+                </span>
               </td>
+              <td>
+                {tender.date_of_tender_notice.slice(0, 16).replace("T", " ")}
+              </td>
+              <td>
+                {tender.date_of_tender_close.slice(0, 16).replace("T", " ")}
+              </td>
+              <td>
+                {tender.date_of_tender_winner.slice(0, 16).replace("T", " ")}
+              </td>
+              <td
+                style={{
+                  color: tender.tender_status === "Open" ? "green" : "black",
+                }}
+              >
+                {tender.tender_status}
+              </td>
+              {(isCompany || isCity) && (
+                <td className="action-buttons">
+                  {isCompany && (
+                    <button
+                      className="action-btn bid-btn"
+                      onClick={() =>
+                        navigate(`/tender/${tender.tender_id}/bid`, {
+                          state: tender,
+                        })
+                      }
+                    >
+                      Bid
+                    </button>
+                  )}
+                </td>
+              )}
             </tr>
           ))}
         </tbody>
       </table>
 
-      <button onClick={() => navigate("/create-tender")}>
-        Register Tender
-      </button>
+      {isCompany && (
+        <button
+          className="action-btn register-btn"
+          onClick={() => navigate("/create-tender")}
+        >
+          +
+        </button>
+      )}
     </div>
   );
 }

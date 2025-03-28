@@ -1,9 +1,146 @@
-table,
-thead,
-tbody,
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  background-color: #f5f5f5;
+}
+
+.tender-list {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 0;
+  margin: 20px auto;
+  max-width: 1200px;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-container input {
+  width: 50%;
+  padding: 10px 10px 10px 30px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-container input:focus {
+  border-color: #001f8b;
+}
+
+.search-icon {
+  position: relative;
+  left: 35px;
+  color: #666;
+  font-size: 18px;
+  pointer-events: none;
+}
+
+.action-btn {
+  color: #ffffff;
+  background-color: #001f8b;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  margin: 0 5px 10px 0;
+  display: inline-block;
+}
+
+.action-btn:hover {
+  background-color: #0035a0;
+}
+
+.action-btn:active {
+  background-color: #002c7a;
+}
+
+.bid-btn {
+  background-color: #2563eb;
+}
+
+.bid-btn:hover {
+  background-color: #1d4ed8;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: #f5f5f5;
+}
+
 th,
 td {
-  border: solid 1px;
-  border-collapse: collapse;
-  padding: 10px;
+  padding: 12px 15px;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+}
+
+th {
+  background-color: #001f8b;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+tr:hover {
+  background-color: #f9fafb;
+}
+
+.click-to-detail {
+  color: #001f8b;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.click-to-detail:hover {
+  color: #0035a0;
+  text-decoration: underline;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.register-btn {
+  font-size: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: #719067;
+  border-radius: 50%;
+  color: #ffffff;
+  cursor: pointer;
+  position: fixed;
+  bottom: 0.00005%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+  z-index: 1000;
+  border: none;
+  outline: none;
+}
+
+.register-btn:hover {
+  background-color: hsl(104, 100%, 25%);
+  transform: translateX(-50%) scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.register-btn:active {
+  transform: translateX(-50%) scale(0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
