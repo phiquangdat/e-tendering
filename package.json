@@ -14,7 +14,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.8",
-    "axios": "^1.8.3",
+    "axios": "^1.8.4",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "material-ui-confirm": "^4.0.0",
@@ -33,15 +33,6 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
-    "vite": "^6.2.2"
-  },
-  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
-  "main": "eslint.config.js",
-  "repository": {
-    "type": "git",
-    "url": "https://e2205685@dev.azure.com/e2205685/e-Tendering/_git/e-Tendering"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "vite": "^6.2.0"
+  }
 }
